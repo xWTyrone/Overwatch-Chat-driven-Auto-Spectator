@@ -10,13 +10,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client-extensions:1.22.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.5" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client:1.22.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client-jetty:1.22.0" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client-servlet:1.22.0" level="project" />
     <orderEntry type="library" name="Gradle: net.java.dev.jna:jna:4.3.0" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client:1.22.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-jackson2:1.22.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client-java6:1.22.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client-appengine:1.22.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client:1.22.0" level="project" />
@@ -24,7 +23,7 @@
     <orderEntry type="library" name="Gradle: org.mortbay.jetty:jetty:6.1.26" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client-appengine:1.22.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.http-client:google-http-client-jackson2:1.22.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client:1.22.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava-jdk5:17.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client-servlet:1.22.0" level="project" />
     <orderEntry type="library" name="Gradle: javax.servlet:servlet-api:2.5" level="project" />
@@ -39,8 +38,9 @@
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.0.1" level="project" />
     <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.apis:google-api-services-youtube:v3-rev182-1.22.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client-jetty:1.22.0" level="project" />
     <orderEntry type="library" name="Gradle: javax.transaction:transaction-api:1.1" level="project" />
-    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.3" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="autokeypresserow_main" />
 </module>
