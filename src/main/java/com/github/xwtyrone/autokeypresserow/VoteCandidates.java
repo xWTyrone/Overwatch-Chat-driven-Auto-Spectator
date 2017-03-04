@@ -1,5 +1,7 @@
 package com.github.xwtyrone.autokeypresserow;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.HashMap;
