@@ -3,7 +3,6 @@ package com.github.xwtyrone.autokeypresserow;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -106,8 +105,6 @@ public class VoteCounter {
                 lock.writeLock().unlock();
             }
         }
-
-        public void max()
     }
 
 

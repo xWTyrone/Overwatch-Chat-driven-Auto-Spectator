@@ -92,7 +92,7 @@ public enum VoteCandidates {
             Arrays.stream(VoteCandidates.values())
                     .forEach(s -> {
                         try {
-                            Map.put(new MapWrapper((Integer) Integer.parseInt(s.id)), s);
+                            Map.put(new MapWrapper(Integer.parseInt(s.id)), s);
                         } catch (Exception e) {
                             Map.put(new MapWrapper(s.id), s);
                         }
@@ -139,17 +139,9 @@ public enum VoteCandidates {
 
             switch (this.wrapperType) {
                 case INTEGER:
-                    if (this.i.equals(temp.i)){
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    return this.i.equals(temp.i);
                 case STRING:
-                    if (this.s.equals(temp.s)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    return this.s.equals(temp.s);
             }
             // this should never be run if the code is done properly. It exists so that the Compiler stops complaining
             // about missing return statements

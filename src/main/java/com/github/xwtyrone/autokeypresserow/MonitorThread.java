@@ -29,7 +29,7 @@ public class MonitorThread implements Runnable {
 
             List<LiveChatMessage> responseList;
             LiveChatMessageListResponse current;
-            long waitPeriod = 0;
+            long waitPeriod;
 
             current = retrieveMessages(pageToken);
             responseList = current.getItems();
@@ -72,7 +72,7 @@ public class MonitorThread implements Runnable {
 
             System.out.println("Retrieved Live Chat ID: " + liveChatId);
 
-            YouTube.LiveChatMessages.List liveMessagesRequest = null;
+            YouTube.LiveChatMessages.List liveMessagesRequest;
             liveMessagesRequest = Main.youtube.liveChatMessages().list(liveChatId, "snippet");
 
             if (pageToken != null) {

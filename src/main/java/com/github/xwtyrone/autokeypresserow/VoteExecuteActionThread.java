@@ -1,8 +1,5 @@
 package com.github.xwtyrone.autokeypresserow;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 /**
  * Created by pauloafecto on 02/03/2017.
  */
@@ -13,7 +10,7 @@ public class VoteExecuteActionThread implements Runnable {
         // this thread collects voting results and queues the result for execution.
 
 
-        HashMap<VoteCandidates,Integer> voteCount
+      //  HashMap<VoteCandidates,Integer> voteCount
 
     }
 }
