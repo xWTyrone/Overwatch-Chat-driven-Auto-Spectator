@@ -46,10 +46,7 @@ public class Auth {
     private static NetHttpTransport getTrustedTransport() {
         try {
             return GoogleNetHttpTransport.newTrustedTransport();
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (IOException e) {
+        } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
@@ -64,7 +61,7 @@ public class Auth {
             e.printStackTrace();
             System.exit(1);
         }
-        return null;
+        throw new InternalError();
 
     }
 

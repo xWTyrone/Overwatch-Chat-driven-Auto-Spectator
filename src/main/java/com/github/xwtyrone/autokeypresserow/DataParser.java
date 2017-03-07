@@ -64,9 +64,7 @@ public class DataParser implements Runnable {
                 });
         currentMessageSet.stream()
                 .filter(s -> s.matches("!O\\s\\s"))
-                .forEach(s -> {
-                    VoteCounter.getInstance().vote(VoteCandidates.map(s.substring(1,2)));
-                });
+                .forEach(s -> VoteCounter.getInstance().vote(VoteCandidates.map(s.substring(1,2))));
     }
 
     public static LocalDateTime processTime(DateTime value) {
