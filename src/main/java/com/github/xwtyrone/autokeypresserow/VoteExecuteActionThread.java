@@ -12,8 +12,5 @@ public class VoteExecuteActionThread implements Runnable {
     public void run() {
         // this thread collects voting results and queues the result for execution.
 
-
-        HashMap<VoteCandidates,Integer> voteCount
-
     }
 }
