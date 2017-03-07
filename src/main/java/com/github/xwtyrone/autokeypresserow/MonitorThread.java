@@ -46,7 +46,7 @@ public class MonitorThread implements Runnable {
 
 
             try {
-                executor.awaitTermination(waitPeriod, TimeUnit.SECONDS);
+                executor.awaitTermination(waitPeriod, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 interrupted = true;

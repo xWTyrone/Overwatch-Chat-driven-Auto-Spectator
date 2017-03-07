@@ -63,6 +63,17 @@ public class VoteCounter {
         }
     }
 
+    public VoteCandidates getVotingWinner() {
+        try {
+            lock.readLock().lock();
+
+            currentVotes.keySet().stream()
+                    .reduce((s,t) -> (currentVotes.get(s).getCount() >= currentVotes.get(t).getCount()) ? s : t);
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
     public void resetAll() {
         currentVotes.values().stream()
                 .forEach(VoteCount::reset);
