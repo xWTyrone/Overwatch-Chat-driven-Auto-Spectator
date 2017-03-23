@@ -3,6 +3,7 @@ package com.github.xwtyrone.autokeypresserow;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -66,9 +67,15 @@ public class VoteCounter {
     public VoteCandidates getVotingWinner() {
         try {
             lock.readLock().lock();
-
-            currentVotes.keySet().stream()
+            Optional<VoteCandidates> value;
+            value = currentVotes.keySet().stream()
                     .reduce((s,t) -> (currentVotes.get(s).getCount() >= currentVotes.get(t).getCount()) ? s : t);
+            if (value.isPresent()) {
+                return value.get();
+            }
+            else {
+                throw new InternalError();
+            }
         } finally {
             lock.readLock().unlock();
         }
