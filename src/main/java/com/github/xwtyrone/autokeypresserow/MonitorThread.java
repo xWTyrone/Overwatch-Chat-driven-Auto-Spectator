@@ -21,6 +21,7 @@ public class MonitorThread implements Runnable {
     private static ExecutorService executor = new ForkJoinPool();
     private static boolean interrupted = false;
     private static String pageToken = null;
+    private static boolean firstLoop = true;
 
     @Override
     public void run() {
@@ -42,8 +43,12 @@ public class MonitorThread implements Runnable {
 
             // TODO: Make Parser Thread into a loop
             DataParser.setStartList(responseList);
-            executor.submit(new DataParser());
+            executor.execute(new DataParser());
 
+            if (firstLoop) {
+                Main.activateScheduled();
+                firstLoop = false;
+            }
 
             try {
                 executor.awaitTermination(waitPeriod, TimeUnit.MILLISECONDS);
