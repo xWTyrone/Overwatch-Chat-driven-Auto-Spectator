@@ -1,6 +1,7 @@
 .gradle/*
 build/*
 .idea/*
+src/main/resources/client_secrets.json
 
 # Ignore Gradle GUI config
 gradle-app.setting

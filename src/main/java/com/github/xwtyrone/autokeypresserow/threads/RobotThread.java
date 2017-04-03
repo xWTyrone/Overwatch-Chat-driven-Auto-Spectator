@@ -1,4 +1,8 @@
-package com.github.xwtyrone.autokeypresserow;
+package com.github.xwtyrone.autokeypresserow.threads;
+
+import com.github.xwtyrone.autokeypresserow.KeyExecutionQueue;
+import com.github.xwtyrone.autokeypresserow.SystemConfig;
+import com.github.xwtyrone.autokeypresserow.VoteCandidates;
 
 import java.awt.*;
 

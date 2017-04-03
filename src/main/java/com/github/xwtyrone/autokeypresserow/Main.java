@@ -1,57 +1,40 @@
 package com.github.xwtyrone.autokeypresserow;
 
+import com.github.xwtyrone.autokeypresserow.gui.MainWindow;
+import com.github.xwtyrone.autokeypresserow.threads.MonitorThread;
+import com.github.xwtyrone.autokeypresserow.threads.RobotThread;
+import com.github.xwtyrone.autokeypresserow.threads.VoteWinnerCounterThread;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.LiveBroadcast;
 import com.google.api.services.youtube.model.LiveBroadcastListResponse;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class Main {
 
     public static YouTube youtube;
     public static LiveBroadcast monitoredBroadcast;
     private static ScheduledThreadPoolExecutor timerExecutor = new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors() - 1);
+    private static BlockingQueue<Runnable> executionQueue = new LinkedBlockingQueue<>();
+    private static ThreadPoolExecutor singleExecutor =
+            new ThreadPoolExecutor(2, Runtime.getRuntime().availableProcessors(), 100000, TimeUnit.MILLISECONDS, executionQueue);
 
     public static void main(String[] args) throws IOException {
             // we only want to force init stuff beforehand
             SystemConfig.getInstance();
             RobotThread.setupRobot();
+            MainWindow.startGUI(null);
             // create and connect to youtube api, occurs in method
             List<LiveBroadcast> broadcastList = getLiveBroadcasts();
 
+
             System.out.println("Data Returned, parsing...");
 
-            int i = 0;
+            /*int i = 0;
 
-            if (broadcastList.size() == 0) {
-                System.out.println("There are no active live streams to retrieve.");
-                System.exit(1);
-            }
-
-            if (broadcastList.size() != 1) {
-
-                System.out.println("More than 1 broadcast is active at the moment. Choose a broadcast below.");
-                System.out.println("\n================== Returned Broadcasts ==================\n");
-                for (LiveBroadcast broadcast : broadcastList) {
-                    System.out.println("Broadcast: " + i);
-                    System.out.println("  - Id: " + broadcast.getId());
-                    System.out.println("  - Title: " + broadcast.getSnippet().getTitle());
-                    System.out.println("  - Description: " + broadcast.getSnippet().getDescription());
-                    System.out.println("  - Published At: " + broadcast.getSnippet().getPublishedAt());
-                    System.out.println(
-                            "  - Scheduled Start Time: " + broadcast.getSnippet().getScheduledStartTime());
-                    System.out.println(
-                            "  - Scheduled End Time: " + broadcast.getSnippet().getScheduledEndTime());
-                    System.out.println("\n-------------------------------------------------------------\n");
-                    i++;
-                }
-                // TODO: Get broadcast selection input from user Implement with GUI?
-            }
 
             LiveBroadcast broadcast = broadcastList.get(i);
 
@@ -59,26 +42,15 @@ public class Main {
             System.out.println("Live Chat monitoring starting...");
 
             if (broadcast.getSnippet().getLiveChatId() == null) {
-                System.err.println("ERROR: Could not retrieve Live Chat ID for monitoring. Is the chat active in the stream? \n " +
+                System.out.println("ERROR: Could not retrieve Live Chat ID for monitoring. Is the chat active in the stream? \n " +
                         "Please check stream chat availability in the Live Control Room and rerun the application.");
                 System.out.println("Application terminated");
-                System.exit(2);
-            }
+            }*/
 
-            monitoredBroadcast = broadcast;
+            //TODO: set the monitored broadcast and check execution path
 
-            new Thread(new MonitorThread()).start();
+            singleExecutor.execute(new MonitorThread());
 
-
-
-            System.out.println("Type quit and enter to exit app.");
-            while (true) {
-                String s = JOptionPane.showInputDialog("Enter a command: ");
-
-                if (s.equals("quit")) {
-                    System.exit(0);
-                }
-            }
     }
 
     private static List<LiveBroadcast> getLiveBroadcasts() throws IOException {
@@ -97,6 +69,10 @@ public class Main {
 
     public static void activateScheduled() {
         timerExecutor.scheduleWithFixedDelay(new VoteWinnerCounterThread(), 10, 10, TimeUnit.SECONDS);
+    }
+
+    public static void activateRobot() {
+        timerExecutor.scheduleWithFixedDelay(new RobotThread(), 10, 10, TimeUnit.SECONDS);
     }
 }
 

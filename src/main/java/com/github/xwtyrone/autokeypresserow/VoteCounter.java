@@ -15,7 +15,7 @@ public class VoteCounter {
     private volatile HashMap<VoteCandidates,VoteCount> currentVotes;
     private static VoteCounter Instance = null;
     private static Object instanceLock = new Object();
-    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true); // fair lock so that FIFO and priority
 
     private VoteCounter() {
          currentVotes = new HashMap<>(VoteCandidates.values().length);
@@ -23,9 +23,10 @@ public class VoteCounter {
                  .forEach(s -> currentVotes.putIfAbsent(s, new VoteCount()));
     }
 
-    public static VoteCounter getInstance() {
+    public synchronized static VoteCounter getInstance() {
         if (Instance == null) {
             //TODO: make this use java.util.concurrency
+            // Only one thread may enter this execution path at any given time
             synchronized (instanceLock) {
                 Instance = new VoteCounter();
             }
@@ -82,8 +83,10 @@ public class VoteCounter {
     }
 
     public void resetAll() {
-        currentVotes.values().stream()
+        lock.writeLock().lock();
+        currentVotes.values()
                 .forEach(VoteCount::reset);
+        lock.writeLock().unlock();
     }
 
 

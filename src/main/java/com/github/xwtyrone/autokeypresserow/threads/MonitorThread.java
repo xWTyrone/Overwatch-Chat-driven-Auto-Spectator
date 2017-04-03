@@ -1,5 +1,6 @@
-package com.github.xwtyrone.autokeypresserow;
+package com.github.xwtyrone.autokeypresserow.threads;
 
+import com.github.xwtyrone.autokeypresserow.Main;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.LiveChatMessage;
 import com.google.api.services.youtube.model.LiveChatMessageListResponse;
@@ -45,6 +46,7 @@ public class MonitorThread implements Runnable {
             DataParser.setStartList(responseList);
             executor.execute(new DataParser());
 
+            // activates vote counting
             if (firstLoop) {
                 Main.activateScheduled();
                 firstLoop = false;

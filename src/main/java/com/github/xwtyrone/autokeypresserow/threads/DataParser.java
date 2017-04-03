@@ -1,5 +1,7 @@
-package com.github.xwtyrone.autokeypresserow;
+package com.github.xwtyrone.autokeypresserow.threads;
 
+import com.github.xwtyrone.autokeypresserow.VoteCandidates;
+import com.github.xwtyrone.autokeypresserow.VoteCounter;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.youtube.model.LiveChatMessage;
 
