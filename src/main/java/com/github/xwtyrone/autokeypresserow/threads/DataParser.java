@@ -30,7 +30,7 @@ public class DataParser implements Runnable {
         List<String> currentMessageSet;
         ArrayList<LocalDateTime> dates = new ArrayList<>(startList.size());
         //java is picky with the variables for streams, this variable is temporary so that he can stfo
-        LocalDateTime tempTime = MonitorThread.getLastMessageTime();
+        LocalDateTime tempTime = RetrievalWorkerThread.getLastMessageTime();
 
 
         //process all date operations
@@ -38,7 +38,7 @@ public class DataParser implements Runnable {
                 .filter(s -> tempTime.isBefore(
                         processTime(s.getSnippet().getPublishedAt())))
                 .collect(Collectors.toList());
-        MonitorThread.setLastMessageTime(currentSet.parallelStream()
+        RetrievalWorkerThread.setLastMessageTime(currentSet.parallelStream()
                 .map(s -> processTime(s.getSnippet().getPublishedAt()))
                 .reduce(tempTime, (a,b) ->
                     // checks if a points to a time before b. If true, returns b.

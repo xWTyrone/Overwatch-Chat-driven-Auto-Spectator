@@ -1,4 +1,4 @@
-package com.github.xwtyrone.autokeypresserow;
+package com.github.xwtyrone.autokeypresserow.net;
 
 
 import com.google.api.client.auth.oauth2.Credential;
